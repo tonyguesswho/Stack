@@ -1,2 +1,2 @@
 # Stack
-A Stack Overflow(Clone) Rest API
+A Stack-Overflow(Clone) Rest API

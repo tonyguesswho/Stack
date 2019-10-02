@@ -1,0 +1,47 @@
+{
+  "name": "stack",
+  "version": "1.0.0",
+  "description": "A stack-overflow clone API",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon --exec babel-node src/server.js",
+    "test": "mocha --require @babel/register 'src/**/**test.js'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tonyguesswho/Stack.git"
+  },
+  "keywords": [
+    "Node",
+    "MongoDB"
+  ],
+  "author": "Anthony Ugwu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tonyguesswho/Stack/issues"
+  },
+  "homepage": "https://github.com/tonyguesswho/Stack#readme",
+  "devDependencies": {
+    "@babel/core": "^7.6.2",
+    "@babel/node": "^7.6.2",
+    "@babel/preset-env": "^7.6.2",
+    "@babel/register": "^7.6.2",
+    "chai": "^4.2.0",
+    "mocha": "^6.2.1",
+    "nodemon": "^1.19.3",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^4.1.0",
+    "eslint-plugin-import": "^2.17.2",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-node": "^8.0.1",
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-react": "^7.12.4",
+    "prettier": "^1.17.0"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.1.0",
+    "express": "^4.17.1"
+  }
+}
