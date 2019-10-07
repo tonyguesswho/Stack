@@ -1,14 +1,18 @@
 import 'dotenv/config';
-import cors from 'cors';
-import express from 'express';
+import mongoose from 'mongoose'
+import app from './app'
 
-const app = express();
-app.use(cors());
+mongoose
+  .connect(process.env.DATABASE_URL, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+    useUnifiedTopology: true
+  })
+  .then(() => console.log('Db connection successful'));
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
-
-app.listen(process.env.PORT, () =>
-  console.log(`Example app listening on port ${process.env.PORT}!`)
+const PORT = process.env.PORT || 3000
+app.listen(PORT, () =>
+  console.log(`app listening on port ${process.env.PORT}!`)
 );
+  
