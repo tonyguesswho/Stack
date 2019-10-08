@@ -1,8 +1,17 @@
 import express from 'express';
-import questionController from '../controllers/questionController'
+import questionController from '../controllers/questionController';
+import authController from '../controllers/authController';
 
 const questionRouter = express.Router();
 
-questionRouter.route('/').get(questionController.getAllQuestions);
+questionRouter
+  .route('/')
+  .post(authController.authMiddleware, questionController.createQuestion)
+  .get(questionController.getAllQuestions);
+
+questionRouter.route('/:id').get(questionController.getQuestion);
+questionRouter
+  .route('/:questionId/answer')
+  .post(authController.authMiddleware, questionController.postAnswer);
 
 export default questionRouter;

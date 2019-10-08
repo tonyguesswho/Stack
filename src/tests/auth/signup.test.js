@@ -12,11 +12,11 @@ const signupData = {
   email: 'samplel@gmail.com'
 };
 
-describe('Authentication and Authorization', () => {
+describe('User Registration', () => {
   before(async () => {
     await User.deleteMany({});
   });
-  describe('POST: /auth/signup', () => {
+  describe('POST: /users/signup', () => {
     it('should create a user successfully', async () => {
       const res = await chai
         .request(app)

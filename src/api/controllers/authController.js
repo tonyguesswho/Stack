@@ -41,7 +41,7 @@ exports.login = catchAsync(async (req, res, next) => {
     return next(new AppError('Invalid email or password', 401));
   }
   const token = createToken(user._id);
-  res.status(201).json({
+  res.status(200).json({
     status: 'success',
     data: {
       token
@@ -60,9 +60,8 @@ exports.authMiddleware = catchAsync(async (req, res, next) => {
   if (!token) {
     return next(new AppError('Authorization Required', 401));
   }
-  const decoded = promisify(jwt.verify)(token, process.env.JWT_SECRET);
-
-  const user = await User.findById(decoded._id); // check user still exists
+  const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+  const user = await User.findById(decoded.id); // check user still exists
   if (!user) {
     return next(new AppError('User does not exist', 401));
   }

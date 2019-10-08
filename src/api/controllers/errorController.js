@@ -1,8 +1,14 @@
 import AppError from './../../utils/appError';
 
 const handleCastError = err => {
-  const message = `Invalid ${err.path}: ${err.value}.`;
-  return new AppError(message, 400);
+  // const value = err.message.match(/(["'])(\\?.)*?\1/)
+  //const message = `Invalid ${err.message.split("model")[1].replace(/\\" /g, "")}`
+
+  return new AppError('Invalid Id', 400);
+};
+const handleJwtError = err => {
+  const message = 'Invalid Token';
+  return new AppError(message, 401);
 };
 const handleValidationError = err => {
   const errors = Object.values(err.errors).map(el => el.message);
@@ -53,6 +59,7 @@ module.exports = (err, req, res, next) => {
     if (error.name === 'CastError') error = handleCastError(error);
     if (error.name === 'ValidationError') error = handleValidationError(error);
     if (error.code === 11000) error = handleDuplicateFields(error);
+    if (error.name === 'JsonWebTokenError') error = handleJwtError(error);
     prodError(error, res);
   }
 };

@@ -28,6 +28,11 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // ROUTES
+app.get('/', (req, res) => {
+  res.status(200).json({
+    message: 'Welcome'
+  });
+});
 app.use('/api/v1/', api);
 
 app.all('*', (req, res, next) => {
