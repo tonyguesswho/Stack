@@ -3,7 +3,6 @@ import chaiHttp from 'chai-http';
 import User from '../../api/models/userModels';
 import app from '../../server';
 
-chai.should();
 chai.use(chaiHttp);
 
 const signupData = {
@@ -32,9 +31,14 @@ describe('Authentication and Authorization', () => {
       const res = await chai
         .request(app)
         .post('/api/v1/users/signup')
-        .send(signupData);
+        .send({
+          name: 'madiba',
+          password: 'Password',
+          confirmPassword: 'Password',
+          email: 'samplel@gmail.com'
+        });
       expect(res).to.have.status(400);
-      expect(res.body.message).to.equal('email already exists');
+      expect(res.body.message).to.equal('Email already exists');
       expect(res.body.status).to.equal('fail');
     });
     it('Return an error for invalid email', async () => {

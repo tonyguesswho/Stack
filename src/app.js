@@ -8,6 +8,7 @@ import bodyParser from 'body-parser';
 import api from './api';
 import AppError from './utils/appError';
 import globalErrorHandler from './api/controllers/errorController';
+import 'babel-polyfill';
 
 const app = express();
 

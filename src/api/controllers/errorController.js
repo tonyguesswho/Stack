@@ -12,8 +12,8 @@ const handleValidationError = err => {
 };
 const handleDuplicateFields = err => {
   // const value = err.errmsg.match(/(["'])(\\?.)*?\1/)[0];
-  const field = Object.keys(err.keyValue)[0];
-  const message = `${field} already exists`;
+  //const field = Object.keys(err.keyValue)[0];
+  const message = `Email already exists`;
   return new AppError(message, 400);
 };
 const prodError = (err, res) => {
