@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon --exec babel-node src/server.js",
     "prod": "cross-env NODE_ENV=production nodemon --exec babel-node src/server.js",
-    "test": "cross-env NODE_ENV=test nyc mocha --timeout 10000  --require @babel/register 'src/**/**test.js' --exit",
+    "test": "cross-env NODE_ENV=test nyc mocha --timeout 100000  --require @babel/register 'src/**/**test.js' --exit",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
