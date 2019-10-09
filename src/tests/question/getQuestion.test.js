@@ -1,7 +1,7 @@
 import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
-import Question from '../../api/models/questionModels';
-import User from '../../api/models/userModels';
+import Question from '../../api/models/questionModel';
+import User from '../../api/models/userModel';
 import app from '../../server';
 
 let questionId;
@@ -78,7 +78,7 @@ describe('Get questions', () => {
       expect(res.body.results).to.equal(2);
       expect(res.body.data.questions[0].title).to.equal(undefined);
     });
-    it('Shoul Paginate', async () => {
+    it('Should Paginate', async () => {
       const res = await chai
         .request(app)
         .get('/api/v1/questions?page=1&limit=1');

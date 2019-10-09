@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 const answerSchema = new mongoose.Schema({
   body: {
     type: String,
-    required: true
+    required: [true, 'Body is required']
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
@@ -13,7 +13,7 @@ const answerSchema = new mongoose.Schema({
   question: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Question',
-    required: [true, 'Answer must belong to a question'],
+    required: [true, 'Answer must belong to a question']
   }
 });
 

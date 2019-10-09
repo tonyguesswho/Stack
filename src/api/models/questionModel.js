@@ -11,6 +11,14 @@ const questionSchema = new mongoose.Schema(
       type: String,
       required: [true, 'Body is required']
     },
+    upVotesTotal: {
+      type: Number,
+      default: 0
+    },
+    downVotesTotal: {
+      type: Number,
+      default: 0
+    },
     user: {
       type: mongoose.Schema.ObjectId,
       ref: 'User',
@@ -40,6 +48,11 @@ questionSchema.virtual('answers', {
   localField: '_id'
 });
 
+questionSchema.virtual('votes', {
+  ref: 'Vote',
+  foreignField: 'question',
+  localField: '_id'
+});
 const Question = mongoose.model('Question', questionSchema);
 
 export default Question;

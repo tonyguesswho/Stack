@@ -14,4 +14,8 @@ questionRouter
   .route('/:questionId/answer')
   .post(authController.authMiddleware, questionController.postAnswer);
 
+questionRouter
+  .route('/:questionId/vote')
+  .post(authController.authMiddleware, questionController.voteQuestion);
+
 export default questionRouter;

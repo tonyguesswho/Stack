@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import { promisify } from 'util';
-import User from './../models/userModels';
+import User from '../models/userModel';
 import catchAsync from './../../utils/catchAsync';
 import AppError from './../../utils/appError';
 import 'dotenv/config';
