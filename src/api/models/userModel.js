@@ -42,6 +42,14 @@ userSchema.pre('save', async function(next) {
 userSchema.methods.checkPassword = async function(inputPassword, userPassword) {
   return await bcrypt.compare(inputPassword, userPassword);
 };
+
+userSchema.index({ name: 'text' });
+
+userSchema.set('toJSON', {
+  transform: (doc, final) => {
+    delete final.__v;
+  }
+});
 const User = mongoose.model('User', userSchema);
 
 export default User;

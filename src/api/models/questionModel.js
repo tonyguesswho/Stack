@@ -53,6 +53,14 @@ questionSchema.virtual('votes', {
   foreignField: 'question',
   localField: '_id'
 });
+
+questionSchema.index({ title: 'text', body: 'text' });
+
+questionSchema.set('toJSON', {
+  transform: (doc, final) => {
+    delete final.__v;
+  }
+});
 const Question = mongoose.model('Question', questionSchema);
 
 export default Question;
