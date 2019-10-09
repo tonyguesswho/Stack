@@ -24,6 +24,13 @@ answerSchema.pre(/^find/, function(next) {
   });
   next();
 });
+answerSchema.index({ body: 'text'});
+
+answerSchema.set('toJSON', {
+  transform: (doc, final) => {
+    delete final.__v;
+  }
+});
 const Answer = mongoose.model('Answer', answerSchema);
 
 export default Answer;
