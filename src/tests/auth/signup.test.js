@@ -38,7 +38,7 @@ describe('User Registration', () => {
           email: 'samplel@gmail.com'
         });
       expect(res).to.have.status(400);
-      expect(res.body.message).to.equal('Email already exists');
+      expect(res.body.message).to.equal('User already exists');
       expect(res.body.status).to.equal('fail');
     });
     it('Return an error for invalid email', async () => {

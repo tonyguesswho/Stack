@@ -49,7 +49,7 @@ describe('Get questions', () => {
           .request(app)
           .get('/api/v1/questions/ijkk');
         expect(res).to.have.status(400);
-        expect(res.body.message).to.equal('Invalid Id');
+        expect(res.body.message).to.equal('Invalid Id provided');
     });
     it('Throw error question is not found', async () => {
         const res = await chai

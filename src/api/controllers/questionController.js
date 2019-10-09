@@ -3,6 +3,7 @@ import AppError from '../../utils/appError';
 import Question from '../models/questionModel';
 import Answer from '../models/answerModel';
 import Vote from '../models/voteModel';
+import Subscription from '../models/subScriptionModel';
 import APIFeatures from '../../utils/apiFeatures';
 
 exports.createQuestion = catchAsync(async (req, res, next) => {
@@ -105,4 +106,33 @@ exports.voteQuestion = catchAsync(async (req, res, next) => {
     vote = await Vote.create({ type, user, question: questionId });
   }
   res.status(200).json({ status: 'success', data: { vote } });
+});
+
+exports.subscribe = catchAsync(async (req, res, next) => {
+  const { questionId } = req.params;
+  const user = req.user._id;
+  const details = await Subscription.create({
+    user,
+    question: questionId
+  });
+  res.status(200).json({
+    status: 'success',
+    message: 'Subscription Successful',
+    details
+  });
+});
+
+exports.unSubscribe = catchAsync(async (req, res, next) => {
+  const { questionId } = req.params;
+  const user = req.user._id;
+  const sub = await Subscription.findOneAndDelete({
+    user,
+    question: questionId
+  });
+  if (!sub)
+    return next(new AppError('User not subscribe to this question', 400));
+  res.status(204).json({
+    status: 'success',
+    message: 'Subscription removed'
+  });
 });
