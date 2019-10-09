@@ -1,4 +1,6 @@
 import mongoose from 'mongoose';
+import Subscription from '../models/subScriptionModel';
+import notify from '../../utils/notification';
 
 const answerSchema = new mongoose.Schema({
   body: {
@@ -24,13 +26,28 @@ answerSchema.pre(/^find/, function(next) {
   });
   next();
 });
-answerSchema.index({ body: 'text'});
+answerSchema.index({ body: 'text' });
 
 answerSchema.set('toJSON', {
   transform: (doc, final) => {
     delete final.__v;
   }
 });
+
+answerSchema.post('save', async function() {
+  const subscriptions = await Subscription.find({
+    question: this.question
+  })
+    .populate('user')
+    .populate('question');
+  if (subscriptions.length > 0) {
+    subscriptions.forEach(subscribtion => {
+      const message = `Check out this new answer for the quesion with Title: ${subscribtion.question.title}`;
+      notify(subscribtion.user.email, 'New Answer', message);
+    });
+  }
+});
+
 const Answer = mongoose.model('Answer', answerSchema);
 
 export default Answer;

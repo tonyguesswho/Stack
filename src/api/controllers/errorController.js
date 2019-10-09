@@ -1,10 +1,7 @@
 import AppError from './../../utils/appError';
 
 const handleCastError = err => {
-  // const value = err.message.match(/(["'])(\\?.)*?\1/)
-  //const message = `Invalid ${err.message.split("model")[1].replace(/\\" /g, "")}`
-
-  return new AppError('Invalid Id', 400);
+  return new AppError('Invalid Id provided', 400);
 };
 const handleJwtError = err => {
   const message = 'Invalid Token';
@@ -17,9 +14,7 @@ const handleValidationError = err => {
   return new AppError(message, 400);
 };
 const handleDuplicateFields = err => {
-  // const value = err.errmsg.match(/(["'])(\\?.)*?\1/)[0];
-  //const field = Object.keys(err.keyValue)[0];
-  const message = `Email already exists`;
+  const message = `User already exists`;
   return new AppError(message, 400);
 };
 const prodError = (err, res) => {
